@@ -39,5 +39,13 @@ export function useCustomerDatabase() {
         }
     }
 
-    return { create, searchByName }
+    async function remove(id: number) {
+        try {
+            await database.execAsync("DELETE FROM customers WHERE id = "+ id);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    return { create, searchByName, remove }
 }

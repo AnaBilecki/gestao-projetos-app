@@ -1,4 +1,4 @@
-import { View, Button, Alert, FlatList } from "react-native";
+import { View, Button, FlatList } from "react-native";
 import { Input } from "../../../components/Input";
 import { useCallback, useEffect, useState } from "react";
 import { useCustomerDatabase } from "src/database/useCustomerDatabase";
@@ -31,6 +31,15 @@ export default function Customers() {
         }
     }
 
+    async function remove(id: number) {
+        try {
+            await customerDatabase.remove(id);
+            await list();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <View style={{ flex: 1, justifyContent: "center", padding: 32, gap: 16 }}>
             <Link href="/customers/Create" asChild>
@@ -43,7 +52,10 @@ export default function Customers() {
                 data={customers}
                 keyExtractor={(item) => String(item.id)}
                 renderItem={({ item }) => (
-                    <CustomerCard data={item} />
+                    <CustomerCard 
+                        data={item}
+                        onDelete={() => remove(item.id)}
+                    />
                 )}
                 contentContainerStyle={{ gap: 16 }}
             />

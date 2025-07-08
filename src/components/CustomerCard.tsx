@@ -1,4 +1,5 @@
-import { Pressable, PressableProps, Text } from "react-native";
+import { Pressable, PressableProps, Text, TouchableOpacity } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 type Props = PressableProps & {
     data: {
@@ -7,10 +8,11 @@ type Props = PressableProps & {
         phone: string,
         city: string,
         state: string
-    }
+    },
+    onDelete: () => void
 }
 
-export function CustomerCard({ data, ...rest }: Props) {
+export function CustomerCard({ data, onDelete, ...rest }: Props) {
     return (
         <Pressable
             style={{
@@ -25,6 +27,10 @@ export function CustomerCard({ data, ...rest }: Props) {
             <Text style={{ flex: 1 }}>
                 {data.name}
             </Text>
+
+            <TouchableOpacity onPress={onDelete}>
+                <MaterialIcons name="delete" size={24} color="red" />
+            </TouchableOpacity>
         </Pressable>
     );
 }
