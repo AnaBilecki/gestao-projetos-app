@@ -16,7 +16,7 @@ export default function Edit() {
 
     useEffect(() => {
         loadCustomer();
-    }, []);
+    }, [id]);
 
     async function loadCustomer() {
         try {
