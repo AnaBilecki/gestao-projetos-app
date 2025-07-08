@@ -39,6 +39,42 @@ export function useCustomerDatabase() {
         }
     }
 
+    async function searchById(id: number) {
+        try {
+            const query = "SELECT * FROM customers WHERE id = ?";
+
+            const response = await database.getFirstAsync<Customer>(
+                query,
+                id
+            );
+
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async function update(data: Customer) {
+        const statement = await database.prepareAsync(
+            "UPDATE customers SET name = $name, email = $email, phone = $phone, city = $city, state = $state WHERE id = $id"
+        );
+
+        try {
+            await statement.executeAsync({
+                $id: data.id,
+                $name: data.name,
+                $email: data.email,
+                $phone: data.phone,
+                $city: data.city,
+                $state: data.state
+            });
+        } catch (error) {
+            throw error;
+        } finally {
+            await statement.finalizeAsync();
+        } 
+    }
+
     async function remove(id: number) {
         try {
             await database.execAsync("DELETE FROM customers WHERE id = "+ id);
@@ -47,5 +83,5 @@ export function useCustomerDatabase() {
         }
     }
 
-    return { create, searchByName, remove }
+    return { create, searchByName, searchById, update, remove }
 }

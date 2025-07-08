@@ -6,6 +6,7 @@ export default function DrawerLayout() {
             <Drawer.Screen name="Home" options={{ title: "Home" }} />
             <Drawer.Screen name="customers/List" options={{ title: "Clientes" }} />
             <Drawer.Screen name="customers/Create" options={{ title: "Novo cliente", drawerItemStyle: { display: 'none' } }} />
+            <Drawer.Screen name="customers/[id]" options={{ title: "Editar cliente", drawerItemStyle: { display: 'none' } }} />
         </Drawer>
     );
 }

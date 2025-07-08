@@ -1,21 +1,44 @@
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import { View, Button } from "react-native";
-import { useState } from "react";
 import { Input } from "src/components/Input";
 import { useCustomerDatabase } from "src/database/useCustomerDatabase";
-import { router } from "expo-router";
 
-export default function NewCustomer() {
+export default function Edit() {
+    const { id } = useLocalSearchParams();
+    const customerDatabase = useCustomerDatabase();
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
 
-    const customerDatabase = useCustomerDatabase();
+    useEffect(() => {
+        loadCustomer();
+    }, []);
+
+    async function loadCustomer() {
+        try {
+            const customer = await customerDatabase.searchById(Number(id));
+            if (customer) {
+                setName(customer.name);
+                setEmail(customer.email);
+                setPhone(customer.phone);
+                setCity(customer.city);
+                setState(customer.state);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     async function save() {
         try {
-            await customerDatabase.create({ name, email, phone, city, state });
+            await customerDatabase.update({
+                id: Number(id), name, email, phone, city, state
+            });
+            
             router.replace("/customers/List");
         } catch (error) {
             console.log(error);

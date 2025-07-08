@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useCustomerDatabase } from "src/database/useCustomerDatabase";
 import { Customer } from "src/types/Customer";
 import { CustomerCard } from "src/components/CustomerCard";
-import { Link, useFocusEffect } from "expo-router";
+import { Link, useFocusEffect, router } from "expo-router";
 
 export default function Customers() {
     const [search, setSearch] = useState("");
@@ -55,6 +55,7 @@ export default function Customers() {
                     <CustomerCard 
                         data={item}
                         onDelete={() => remove(item.id)}
+                        onPress={() => router.push(`/customers/${item.id}`)}
                     />
                 )}
                 contentContainerStyle={{ gap: 16 }}

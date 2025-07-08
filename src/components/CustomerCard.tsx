@@ -9,12 +9,14 @@ type Props = PressableProps & {
         city: string,
         state: string
     },
-    onDelete: () => void
-}
+    onDelete: () => void,
+    onPress: () => void
+};
 
-export function CustomerCard({ data, onDelete, ...rest }: Props) {
+export function CustomerCard({ data, onDelete, onPress, ...rest }: Props) {
     return (
         <Pressable
+            onPress={onPress}
             style={{
                 backgroundColor: "#CECECE",
                 padding: 24,
