@@ -1,11 +1,11 @@
 import { View, Button, Alert, FlatList } from "react-native";
-import { Input } from "../components/Input";
+import { Input } from "../../../components/Input";
 import { useEffect, useState } from "react";
 import { useCustomerDatabase } from "src/database/useCustomerDatabase";
 import { Customer } from "src/types/Customer";
 import { CustomerCard } from "src/components/CustomerCard";
 
-export default function Index() {
+export default function Customers() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
