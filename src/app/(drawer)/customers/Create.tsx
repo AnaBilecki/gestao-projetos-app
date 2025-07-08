@@ -16,7 +16,7 @@ export default function NewCustomer() {
     async function salvar() {
         try {
             await customerDatabase.create({ name, email, phone, city, state });
-            router.replace("/customers");
+            router.replace("/customers/List");
         } catch (error) {
             console.log(error);
         }
