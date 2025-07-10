@@ -1,4 +1,5 @@
 import { Drawer } from "expo-router/drawer";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function DrawerLayout() {
     return (
@@ -21,8 +22,24 @@ export default function DrawerLayout() {
                 headerTintColor: "#9B7E66",
             }}
         >
-            <Drawer.Screen name="Home" options={{ title: "INÍCIO" }} />
-            <Drawer.Screen name="customers/List" options={{ title: "CLIENTES" }} />
+            <Drawer.Screen 
+                name="Home"
+                options={{ 
+                    title: "INÍCIO",   
+                    drawerIcon: ({ color, size }) => (
+                        <MaterialIcons name="home" size={size} color={color} />
+                    ),
+                }} 
+            />
+            <Drawer.Screen 
+                name="customers/List" 
+                options={{
+                    title: "CLIENTES",
+                    drawerIcon: ({ color, size }) => (
+                        <MaterialIcons name="person" size={size} color={color} />
+                    ),
+                }} 
+            />
             <Drawer.Screen name="customers/Create" options={{ title: "NOVO CLIENTE", drawerItemStyle: { display: 'none' } }} />
             <Drawer.Screen name="customers/[id]" options={{ title: "EDITAR CLIENTE", drawerItemStyle: { display: 'none' } }} />
         </Drawer>
