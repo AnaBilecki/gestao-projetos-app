@@ -20,7 +20,9 @@
     "react-dom": "19.0.0",
     "react-native": "0.79.5",
     "react-native-reanimated": "^3.17.4",
-    "react-native-web": "^0.20.0"
+    "react-native-web": "^0.20.0",
+    "expo-font": "~13.3.2",
+    "expo-splash-screen": "~0.30.10"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
