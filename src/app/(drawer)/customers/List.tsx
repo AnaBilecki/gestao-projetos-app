@@ -6,10 +6,15 @@ import { CustomerCard } from "src/components/CustomerCard";
 import { Link, useFocusEffect, router } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SearchInput } from "src/components/SearchInput";
+import { Toast } from "src/components/Toast";
 
 export default function Customers() {
     const [search, setSearch] = useState("");
     const [customers, setCustomers] = useState<Customer[]>([]);
+    const [toast, setToast] = useState<{
+        message: string;
+        type: "success" | "error";
+    } | null>(null);
 
     const customerDatabase = useCustomerDatabase();
 
@@ -36,13 +41,22 @@ export default function Customers() {
         try {
             await customerDatabase.remove(id);
             await list();
+            setToast({ message: "Cliente removido com sucesso!", type: "success" });
         } catch (error) {
-            console.log(error);
+            setToast({ message: "Erro ao remover cliente.", type: "error" });
         }
     }
 
     return (
         <View style={styles.container}>
+            {toast && (
+                <Toast
+                    message={toast.message}
+                    type={toast.type}
+                    onHide={() => setToast(null)}
+                />
+            )}
+
             <Link href="/customers/Create" asChild>
                 <TouchableOpacity style={styles.addButton}>
                     <MaterialIcons name="add" size={28} color="#fff" />
