@@ -21,7 +21,7 @@ export function CustomerCard({ data, onDelete, onPress, ...rest }: Props) {
             {...rest}
         >
             <TouchableOpacity onPress={onDelete} style={styles.deleteButton}>
-                <MaterialIcons name="delete" size={22} color="#e57373" />
+                <MaterialIcons name="close" size={22} color="#e57373" />
             </TouchableOpacity>
 
             <View style={styles.infoContainer}>
