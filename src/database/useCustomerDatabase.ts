@@ -26,7 +26,7 @@ export function useCustomerDatabase() {
 
     async function searchByName(name: string) {
         try {
-            const query = "SELECT * FROM customers WHERE name LIKE ?";
+            const query = "SELECT * FROM customers WHERE name LIKE ? ORDER BY name ASC";
 
             const response = await database.getAllAsync<Customer>(
                 query,
