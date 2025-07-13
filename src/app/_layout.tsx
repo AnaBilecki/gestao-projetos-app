@@ -1,11 +1,15 @@
+import "react-native-gesture-handler";
 import { SQLiteProvider } from "expo-sqlite";
 import { initializeDatabase } from "../database/initializeDatabase";
 import { Slot } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import 'react-native-screens';
+import { enableScreens } from 'react-native-screens';
 
+enableScreens();
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
@@ -15,20 +19,21 @@ export default function Layout() {
         SweetSansProHeavy: require("../../assets/fonts/SweetSansProHeavy.otf"),
     });
 
-    useEffect(() => {
-        async function hideSplash() {
-            if (fontsLoaded) {
-                await SplashScreen.hideAsync();
-            }
+    const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded) {
+            await SplashScreen.hideAsync();
         }
-        hideSplash();
     }, [fontsLoaded]);
+
+    useEffect(() => {
+        onLayoutRootView();
+    }, [onLayoutRootView]);
 
     if (!fontsLoaded) return null;
 
     return (
         <SQLiteProvider databaseName="gestaoProjeto.db" onInit={initializeDatabase}>
-            <View style={styles.container}>
+            <View style={styles.container} onLayout={onLayoutRootView}>
                 <Slot />
             </View>
         </SQLiteProvider>
