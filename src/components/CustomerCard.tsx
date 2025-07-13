@@ -14,6 +14,16 @@ type Props = PressableProps & {
 };
 
 export function CustomerCard({ data, onDelete, onPress, ...rest }: Props) {
+    function formatPhone(phone: string) {
+        const cleaned = phone.replace(/\D/g, "");
+
+        if (cleaned.length === 11) {
+            return `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 7)}-${cleaned.slice(7)}`;
+        }
+
+        return phone;
+    }
+
     return (
         <Pressable
             onPress={onPress}
@@ -34,7 +44,7 @@ export function CustomerCard({ data, onDelete, onPress, ...rest }: Props) {
 
                 <View style={styles.row}>
                     <MaterialIcons name="phone" size={18} color="#9B7E66" />
-                    <Text style={styles.infoText}>{data.phone}</Text>
+                    <Text style={styles.infoText}>{formatPhone(data.phone)}</Text>
                 </View>
 
                 <View style={styles.row}>
@@ -57,7 +67,7 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
-        shadowRadius: 5,
+        shadowRadius: 12,
         elevation: 3,
         marginBottom: 16,
     },
