@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 12,
         alignItems: "center",
-        height: 44,
+        height: 55,
         borderWidth: 1,
         borderColor: "#c8af9a",
     },
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
-        fontSize: 14,
+        fontSize: 16,
+        padding: 15,
         fontFamily: "SweetSansProRegular",
         paddingVertical: 0,
     },
