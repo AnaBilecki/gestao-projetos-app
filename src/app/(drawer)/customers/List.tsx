@@ -63,7 +63,7 @@ export default function Customers() {
                 </TouchableOpacity>
             </Link>
 
-            <SearchInput placeholder="Pesquisar" onChangeText={setSearch} />
+            <SearchInput placeholder="Busque pelo nome" onChangeText={setSearch} />
 
             <FlatList
                 data={customers}
