@@ -1,5 +1,7 @@
 import { Drawer } from "expo-router/drawer";
 import { MaterialIcons } from "@expo/vector-icons";
+import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
+import { Image, StyleSheet, View } from "react-native";
 
 export default function DrawerLayout() {
     return (
@@ -21,6 +23,14 @@ export default function DrawerLayout() {
                 },
                 headerTintColor: "#9B7E66",
             }}
+            drawerContent={(props) => (
+                <DrawerContentScrollView {...props}>
+                    <View style={styles.logoContainer}>
+                        <Image source={require("../../../assets/images/logo.png")} style={styles.logo} />
+                    </View>
+                    <DrawerItemList {...props} />
+                </DrawerContentScrollView>
+            )}
         >
             <Drawer.Screen 
                 name="Home"
@@ -45,3 +55,17 @@ export default function DrawerLayout() {
         </Drawer>
     );
 }
+
+
+const styles = StyleSheet.create({
+    logoContainer: {
+        alignItems: "center",
+        padding: 16,
+        marginBottom: 8,
+        height: 100
+    },
+    logo: {
+        width: 200,
+        height: 80,
+    },
+});
