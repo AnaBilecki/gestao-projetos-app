@@ -52,6 +52,17 @@ export default function DrawerLayout() {
             />
             <Drawer.Screen name="customers/Create" options={{ title: "NOVO CLIENTE", drawerItemStyle: { display: 'none' } }} />
             <Drawer.Screen name="customers/[id]" options={{ title: "EDITAR CLIENTE", drawerItemStyle: { display: 'none' } }} />
+            <Drawer.Screen 
+                name="steps/List" 
+                options={{
+                    title: "ETAPAS",
+                    drawerIcon: ({ color, size }) => (
+                        <MaterialIcons name="summarize" size={size} color={color} />
+                    ),
+                }} 
+            />
+            <Drawer.Screen name="steps/Create" options={{ title: "NOVA ETAPA", drawerItemStyle: { display: 'none' } }} />
+            <Drawer.Screen name="steps/[id]" options={{ title: "EDITAR ETAPA", drawerItemStyle: { display: 'none' } }} />
         </Drawer>
     );
 }

@@ -1,22 +1,22 @@
-import { View, FlatList, StyleSheet, TouchableOpacity } from "react-native";
-import { useCallback, useEffect, useState } from "react";
-import { useCustomerDatabase } from "src/database/useCustomerDatabase";
-import { Customer } from "src/types/Customer";
-import { CustomerCard } from "src/components/CustomerCard";
-import { Link, useFocusEffect, router } from "expo-router";
-import { MaterialIcons } from "@expo/vector-icons";
-import { SearchInput } from "src/components/SearchInput";
+import { Link, router, useFocusEffect } from "expo-router";
+import React, { useCallback, useEffect, useState } from "react";
+import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Toast } from "src/components/Toast";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Step } from "src/types/Step";
+import { useStepDatabase } from "src/database/useStepDatabase";
+import { SearchInput } from "src/components/SearchInput";
+import { StepCard } from "src/components/StepCard";
 
-export default function Customers() {
+export default function Steps() {
     const [search, setSearch] = useState("");
-    const [customers, setCustomers] = useState<Customer[]>([]);
+    const [steps, setSteps] = useState<Step[]>([]);
     const [toast, setToast] = useState<{
         message: string;
         type: "success" | "error";
     } | null>(null);
 
-    const customerDatabase = useCustomerDatabase();
+    const stepDatabase = useStepDatabase();
 
     useFocusEffect(
         useCallback(() => {
@@ -27,23 +27,23 @@ export default function Customers() {
     useEffect(() => {
         list();
     }, [search]);
-
+    
     async function list() {
         try {
-            const response = await customerDatabase.searchByName(search);
-            setCustomers(response);
+            const response = await stepDatabase.searchByName(search);
+            setSteps(response);
         } catch (error) {
-            setToast({ message: "Erro ao listar clientes.", type: "error" });
+            setToast({ message: "Erro ao listar etapas.", type: "error" });
         }
     }
 
     async function remove(id: number) {
         try {
-            await customerDatabase.remove(id);
+            await stepDatabase.remove(id);
             await list();
-            setToast({ message: "Cliente removido com sucesso!", type: "success" });
+            setToast({ message: "Etapa removida com sucesso!", type: "success" });
         } catch (error) {
-            setToast({ message: "Erro ao remover cliente.", type: "error" });
+             setToast({ message: "Erro ao remover etapa.", type: "error" });
         }
     }
 
@@ -57,22 +57,22 @@ export default function Customers() {
                 />
             )}
 
-            <Link href="/customers/Create" asChild>
+            <Link href="/steps/Create" asChild>
                 <TouchableOpacity style={styles.addButton}>
                     <MaterialIcons name="add" size={28} color="#fff" />
                 </TouchableOpacity>
             </Link>
 
             <SearchInput placeholder="Busque pelo nome" onChangeText={setSearch} />
-
+            
             <FlatList
-                data={customers}
+                data={steps}
                 keyExtractor={(item) => String(item.id)}
                 renderItem={({ item }) => (
-                    <CustomerCard 
+                    <StepCard
                         data={item}
                         onDelete={() => remove(item.id)}
-                        onPress={() => router.push(`/customers/${item.id}`)}
+                        onPress={() => router.push(`/steps/${item.id}`)}
                     />
                 )}
                 contentContainerStyle={{ gap: 5 }}

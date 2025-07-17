@@ -1,21 +1,18 @@
 import { useSQLiteContext } from "expo-sqlite";
-import { Customer } from "src/types/Customer";
+import { Step } from "src/types/Step";
 
-export function useCustomerDatabase() {
+export function useStepDatabase() {
     const database = useSQLiteContext();
 
-    async function create(data: Omit<Customer, "id">) {
+    async function create(data: Omit<Step, "id">) {
         const statement = await database.prepareAsync(
-            "INSERT INTO customers (name, email, phone, city, state) VALUES ($name, $email, $phone, $city, $state)"
+            "INSERT INTO steps (name, description) VALUES ($name, $description)"
         );
 
         try {
             await statement.executeAsync({
                 $name: data.name,
-                $email: data.email,
-                $phone: data.phone,
-                $city: data.city,
-                $state: data.state
+                $description: data.description
             });
         } catch (error) {
             throw error;
@@ -26,13 +23,13 @@ export function useCustomerDatabase() {
 
     async function searchByName(name: string) {
         try {
-            const query = "SELECT * FROM customers WHERE name LIKE ? ORDER BY name ASC";
-
-            const response = await database.getAllAsync<Customer>(
+            const query = "SELECT * FROM steps WHERE name LIKE ? ORDER BY name ASC";
+            
+            const response = await database.getAllAsync<Step>(
                 query,
                 `%${name}%`
             );
-
+            
             return response;
         } catch (error) {
             throw error;
@@ -41,32 +38,29 @@ export function useCustomerDatabase() {
 
     async function searchById(id: number) {
         try {
-            const query = "SELECT * FROM customers WHERE id = ?";
-
-            const response = await database.getFirstAsync<Customer>(
+            const query = "SELECT * FROM steps WHERE id = ?";
+    
+            const response = await database.getFirstAsync<Step>(
                 query,
                 id
             );
-
+    
             return response;
         } catch (error) {
             throw error;
         }
     }
 
-    async function update(data: Customer) {
+    async function update(data: Step) {
         const statement = await database.prepareAsync(
-            "UPDATE customers SET name = $name, email = $email, phone = $phone, city = $city, state = $state WHERE id = $id"
+            "UPDATE steps SET name = $name, description = $description WHERE id = $id"
         );
-
+    
         try {
             await statement.executeAsync({
                 $id: data.id,
                 $name: data.name,
-                $email: data.email,
-                $phone: data.phone,
-                $city: data.city,
-                $state: data.state
+                $description: data.description
             });
         } catch (error) {
             throw error;
@@ -77,7 +71,7 @@ export function useCustomerDatabase() {
 
     async function remove(id: number) {
         try {
-            await database.execAsync("DELETE FROM customers WHERE id = " + id);
+            await database.execAsync("DELETE FROM steps WHERE id = " + id);
         } catch (error) {
             throw error;
         }

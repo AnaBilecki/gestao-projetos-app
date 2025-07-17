@@ -10,5 +10,11 @@ export async function initializeDatabase(database: SQLiteDatabase) {
             email TEXT,
             phone TEXT
         );
+
+        CREATE TABLE IF NOT EXISTS steps (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            description TEXT
+        );
     `);
 }

@@ -1,4 +1,4 @@
-import { View, Button, TouchableOpacity, StyleSheet, Text } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import { useState } from "react";
 import { Input } from "src/components/Input";
 import { useCustomerDatabase } from "src/database/useCustomerDatabase";
@@ -84,9 +84,9 @@ export default function NewCustomer() {
         <View style={styles.container}>
             {toast && (
                 <Toast
-                message={toast.message}
-                type={toast.type}
-                onHide={() => setToast(null)}
+                    message={toast.message}
+                    type={toast.type}
+                    onHide={() => setToast(null)}
                 />
             )}
 

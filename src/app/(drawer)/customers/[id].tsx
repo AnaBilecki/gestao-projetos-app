@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { View, Button, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Input } from "src/components/Input";
 import { Toast } from "src/components/Toast";
 import { useCustomerDatabase } from "src/database/useCustomerDatabase";
