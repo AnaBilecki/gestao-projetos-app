@@ -39,6 +39,12 @@ export default function Steps() {
 
     async function remove(id: number) {
         try {
+            const projects = await stepDatabase.hasProjects(id);
+            if (projects) {
+                setToast({ message: "Não é possível remover a etapa pois está vinculada a projetos.", type: "error" });
+                return;
+            }
+
             await stepDatabase.remove(id);
             await list();
             setToast({ message: "Etapa removida com sucesso!", type: "success" });

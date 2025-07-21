@@ -83,5 +83,20 @@ export function useCustomerDatabase() {
         }
     }
 
-    return { create, searchByName, searchById, update, remove };
+    async function hasProjects(customerId: number) {
+        try {
+            const query = "SELECT COUNT(*) AS count FROM projects WHERE customer_id = ?";
+
+            const response = await database.getFirstAsync<{ count: number }>(
+                query,
+                customerId
+            );
+
+            return (response?.count ?? 0) > 0;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    return { create, searchByName, searchById, update, remove, hasProjects };
 }

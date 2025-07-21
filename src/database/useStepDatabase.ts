@@ -77,5 +77,20 @@ export function useStepDatabase() {
         }
     }
 
-    return { create, searchByName, searchById, update, remove };
+    async function hasProjects(stepId: number) {
+        try {
+            const query = "SELECT COUNT(*) AS count FROM project_steps WHERE step_id = ?";
+
+            const response = await database.getFirstAsync<{ count: number }>(
+                query,
+                stepId
+            );
+
+            return (response?.count ?? 0) > 0;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    return { create, searchByName, searchById, update, remove, hasProjects };
 }

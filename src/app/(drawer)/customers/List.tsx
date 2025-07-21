@@ -39,6 +39,12 @@ export default function Customers() {
 
     async function remove(id: number) {
         try {
+            const projects = await customerDatabase.hasProjects(id);
+            if (projects) {
+                setToast({ message: "Não é possível remover o cliente pois há projetos vinculados.", type: "error" });
+                return;
+            }
+
             await customerDatabase.remove(id);
             await list();
             setToast({ message: "Cliente removido com sucesso!", type: "success" });
