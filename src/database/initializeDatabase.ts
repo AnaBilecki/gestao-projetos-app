@@ -16,5 +16,26 @@ export async function initializeDatabase(database: SQLiteDatabase) {
             name TEXT NOT NULL,
             description TEXT
         );
+
+        CREATE TABLE IF NOT EXISTS projects (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            start_date TEXT,
+            end_date TEXT,
+            deadline INTEGER,
+
+            FOREIGN KEY (customer_id) REFERENCES customers(id)
+        );
+
+        CREATE TABLE IF NOT EXISTS project_steps (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            project_id INTEGER NOT NULL,
+            step_id INTEGER NOT NULL,
+            completed INTEGER NOT NULL DEFAULT 0,
+            
+            FOREIGN KEY (project_id) REFERENCES projects(id),
+            FOREIGN KEY (step_id) REFERENCES steps(id)
+        );
     `);
 }

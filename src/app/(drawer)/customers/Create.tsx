@@ -29,7 +29,7 @@ export default function NewCustomer() {
             const rawPhone = unmaskPhone(phone);
             await customerDatabase.create({ name, email, phone: rawPhone, city, state });
             clearData();
-            setToast({ message: "Cliente criado com sucesso!", type: "success" });
+            setToast({ message: "Cliente cadastrado com sucesso!", type: "success" });
             setTimeout(() => {
                 router.replace("/customers/List");
             }, 1500);

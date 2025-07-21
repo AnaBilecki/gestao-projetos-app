@@ -25,7 +25,7 @@ export default function NewStep() {
         try {
             await stepDatabase.create({ name, description });
             clearData();
-            setToast({ message: "Etapa criada com sucesso!", type: "success" });
+            setToast({ message: "Etapa cadastrada com sucesso!", type: "success" });
             setTimeout(() => {
                 router.replace("/steps/List");
             }, 1500);

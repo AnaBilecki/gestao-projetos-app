@@ -5,7 +5,7 @@ import { Input } from "src/components/Input";
 import { Toast } from "src/components/Toast";
 import { useCustomerDatabase } from "src/database/useCustomerDatabase";
 
-export default function Edit() {
+export default function EditCustomer() {
     const { id } = useLocalSearchParams();
 
     const [name, setName] = useState("");

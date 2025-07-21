@@ -6,3 +6,8 @@ export interface Customer {
     city: string;
     state: string;
 }
+
+export interface CustomerList {
+    id: number;
+    name: string;
+}

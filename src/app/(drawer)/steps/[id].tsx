@@ -5,7 +5,7 @@ import { Input } from "src/components/Input";
 import { Toast } from "src/components/Toast";
 import { useStepDatabase } from "src/database/useStepDatabase";
 
-export default function Edit() {
+export default function EditStep() {
     const { id } = useLocalSearchParams();
     
     const [name, setName] = useState("");

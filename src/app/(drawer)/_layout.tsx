@@ -50,7 +50,7 @@ export default function DrawerLayout() {
                     ),
                 }} 
             />
-            <Drawer.Screen name="customers/Create" options={{ title: "NOVO CLIENTE", drawerItemStyle: { display: 'none' } }} />
+            <Drawer.Screen name="customers/Create" options={{ title: "CADASTRAR CLIENTE", drawerItemStyle: { display: 'none' } }} />
             <Drawer.Screen name="customers/[id]" options={{ title: "EDITAR CLIENTE", drawerItemStyle: { display: 'none' } }} />
             <Drawer.Screen 
                 name="steps/List" 
@@ -61,8 +61,19 @@ export default function DrawerLayout() {
                     ),
                 }} 
             />
-            <Drawer.Screen name="steps/Create" options={{ title: "NOVA ETAPA", drawerItemStyle: { display: 'none' } }} />
+            <Drawer.Screen name="steps/Create" options={{ title: "CADASTRAR ETAPA", drawerItemStyle: { display: 'none' } }} />
             <Drawer.Screen name="steps/[id]" options={{ title: "EDITAR ETAPA", drawerItemStyle: { display: 'none' } }} />
+            <Drawer.Screen 
+                name="projects/List" 
+                options={{
+                    title: "PROJETOS",
+                    drawerIcon: ({ color, size }) => (
+                        <MaterialIcons name="folder" size={size} color={color} />
+                    ),
+                }} 
+            />
+            <Drawer.Screen name="projects/Create" options={{ title: "CADASTRAR PROJETO", drawerItemStyle: { display: 'none' } }} />
+            <Drawer.Screen name="projects/[id]" options={{ title: "EDITAR PROJETO", drawerItemStyle: { display: 'none' } }} />
         </Drawer>
     );
 }
