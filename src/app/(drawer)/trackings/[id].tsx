@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
         borderRadius: 50,
         alignItems: "center",
-        marginBottom: 16,
+        marginBottom: 30,
         elevation: 5,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },

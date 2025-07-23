@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
         height: 100
     },
     logo: {
-        width: 200,
+        width: 250,
         height: 80,
+        resizeMode: "contain"
     },
 });
