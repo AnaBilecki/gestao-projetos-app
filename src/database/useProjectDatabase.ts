@@ -55,6 +55,7 @@ export function useProjectDatabase() {
                     ps.id AS projectStepId,
                     ps.step_id AS stepId,
                     ps.completed AS completed,
+                    ps.step_order as stepOrder,
 
                     s.name AS stepName,
                     s.description AS stepDescription
@@ -95,6 +96,7 @@ export function useProjectDatabase() {
                         completed: !!row.completed,
                         name: row.stepName,
                         description: row.stepDescription,
+                        stepOrder: row.stepOrder
                     });
                 }
             }
@@ -120,6 +122,7 @@ export function useProjectDatabase() {
                     ps.id AS projectStepId,
                     ps.step_id AS stepId,
                     ps.completed AS completed,
+                    ps.step_order as stepOrder,
 
                     s.name AS stepName,
                     s.description AS stepDescription
@@ -128,6 +131,7 @@ export function useProjectDatabase() {
                 LEFT JOIN project_steps ps ON ps.project_id = p.id
                 LEFT JOIN steps s ON s.id = ps.step_id
                 WHERE p.id = ?
+                ORDER BY ps.step_order ASC
             `;
 
             const response = await database.getAllAsync<any>(
@@ -155,6 +159,7 @@ export function useProjectDatabase() {
                         completed: !!row.completed,
                         name: row.stepName,
                         description: row.stepDescription,
+                        stepOrder: row.stepOrder
                     });
                 }
             }
@@ -175,7 +180,7 @@ export function useProjectDatabase() {
         );
 
         const createProjectStepStatement = await database.prepareAsync(
-            "INSERT INTO project_steps (project_id, step_id, completed) VALUES ($projectId, $stepId, $completed)"
+            "INSERT INTO project_steps (project_id, step_id, completed, step_order) VALUES ($projectId, $stepId, $completed, $stepOrder)"
         );
 
         try {
@@ -195,6 +200,7 @@ export function useProjectDatabase() {
                     $projectId: data.id,
                     $stepId: step.stepId,
                     $completed: step.completed ? 1 : 0,
+                    $order: step.stepOrder ? step.stepOrder : null
                 });
             }
         } catch (error) {

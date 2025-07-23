@@ -74,6 +74,16 @@ export default function DrawerLayout() {
             />
             <Drawer.Screen name="projects/Create" options={{ title: "CADASTRAR PROJETO", drawerItemStyle: { display: 'none' } }} />
             <Drawer.Screen name="projects/[id]" options={{ title: "EDITAR PROJETO", drawerItemStyle: { display: 'none' } }} />
+            <Drawer.Screen 
+                name="trackings/List" 
+                options={{
+                    title: "STATUS",
+                    drawerIcon: ({ color, size }) => (
+                        <MaterialIcons name="library-add-check" size={size} color={color} />
+                    ),
+                }} 
+            />
+            <Drawer.Screen name="trackings/[id]" options={{ title: "ACOMPANHAMENTO", drawerItemStyle: { display: 'none' } }} />
         </Drawer>
     );
 }

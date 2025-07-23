@@ -33,7 +33,7 @@ export async function initializeDatabase(database: SQLiteDatabase) {
             project_id INTEGER NOT NULL,
             step_id INTEGER NOT NULL,
             completed INTEGER NOT NULL DEFAULT 0,
-            
+            step_order INTEGER,
             FOREIGN KEY (project_id) REFERENCES projects(id),
             FOREIGN KEY (step_id) REFERENCES steps(id)
         );

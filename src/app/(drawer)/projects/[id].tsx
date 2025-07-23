@@ -1,5 +1,5 @@
-import { router, useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
+import { useCallback, useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CustomerSelect from "src/components/CustomerSelect";
 import { Input } from "src/components/Input";
@@ -23,6 +23,12 @@ export default function EditProject() {
     } | null>(null);
 
     const projectDatabase = useProjectDatabase();
+
+    useFocusEffect(
+        useCallback(() => {
+            loadProject();
+        }, [id])
+    );
 
     useEffect(() => {
         loadProject();

@@ -16,4 +16,5 @@ export interface ProjectStep {
     completed: boolean;
     name: string;
     description?: string;
+    stepOrder?: number;
 }
