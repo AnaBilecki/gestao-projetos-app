@@ -84,10 +84,18 @@ export default function DrawerLayout() {
                 }} 
             />
             <Drawer.Screen name="trackings/[id]" options={{ title: "ACOMPANHAMENTO", drawerItemStyle: { display: 'none' } }} />
+            <Drawer.Screen 
+                name="Export" 
+                options={{
+                    title: "CONFIGURAÇÕES",
+                    drawerIcon: ({ color, size }) => (
+                        <MaterialIcons name="settings" size={size} color={color} />
+                    ),
+                }}
+            />
         </Drawer>
     );
 }
-
 
 const styles = StyleSheet.create({
     logoContainer: {
