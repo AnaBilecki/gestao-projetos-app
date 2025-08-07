@@ -55,7 +55,6 @@ export default function Trackings() {
                     <ProjectStatusCard 
                         data={{ name: item.name, customerName: item.customerName, startDate: item.startDate, endDate: item.endDate, steps: item.steps }}
                         onPress={() => router.push(`/trackings/${item.id}`)}
-                        onGeneratePdf={() => console.log("Gerar pdf")}
                     />
                 )}
                 contentContainerStyle={{ gap: 5 }}

@@ -12,11 +12,10 @@ type Props = PressableProps & {
         endDate?: string | null,
         steps?: ProjectStep[]
     },
-    onPress: () => void,
-    onGeneratePdf: () => void
+    onPress: () => void
 };
 
-export function ProjectStatusCard({ data, onPress, onGeneratePdf, ...rest }: Props) {
+export function ProjectStatusCard({ data, onPress, ...rest }: Props) {
     type MaterialIconName = 
         | "schedule"
         | "check-circle"
@@ -66,10 +65,6 @@ export function ProjectStatusCard({ data, onPress, onGeneratePdf, ...rest }: Pro
             style={styles.card}
             {...rest}
         >
-            <TouchableOpacity onPress={onGeneratePdf} style={styles.pdfButton}>
-                <MaterialIcons name="picture-as-pdf" size={24} color="#9B7E66" />
-            </TouchableOpacity>
-
             <View style={styles.infoContainer}>
                 <Text style={styles.name}>{data.name}</Text>
 
@@ -131,12 +126,5 @@ const styles = StyleSheet.create({
         marginLeft: 8,
         fontSize: 14,
         fontFamily: "SweetSansProRegular",
-    },
-    pdfButton: {
-        position: "absolute",
-        top: 12,
-        right: 12,
-        padding: 4,
-        zIndex: 10,
     }
 });
